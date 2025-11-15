@@ -1,3 +1,6 @@
+'''Draws and updates player character; handles bool for firing bullets
+'''
+
 import pygame
 from typing import TYPE_CHECKING
 
@@ -31,6 +34,7 @@ class Ship:
         self.arsenal.update_arsenal()
 
     def _update_ship_movement(self):
+        # uses ship_speed in settings to determine how quickly the player can move with arrow keys
         temp_speed = self.settings.ship_speed
         if self.moving_right and self.rect.right < self.boundaries.right:
             self.x += temp_speed
@@ -40,8 +44,10 @@ class Ship:
         self.rect.x = self.x
 
     def draw(self) -> None:
+        # draws player sprite visually on screen
         self.arsenal.draw()
         self.screen.blit(self.image, self.rect)
 
     def fire(self) -> bool:
+        # returns bool based on if player is able to fire a bullet
         return self.arsenal.fire_bullet()
