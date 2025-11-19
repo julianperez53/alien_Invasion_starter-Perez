@@ -1,3 +1,6 @@
+'''Loads, draws, and moves bullet
+'''
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
@@ -21,8 +24,10 @@ class Bullet(Sprite):
         self.y = float(self.rect.y)
 
     def update(self):
+        # moves bullet based on bullet_speed in settings
         self.y -= self.settings.bullet_speed
         self.rect.y = self.y
 
     def draw_bullet(self) -> None:
+        # draws bullet visually on screen
         self.screen.blit(self.image, self.rect)

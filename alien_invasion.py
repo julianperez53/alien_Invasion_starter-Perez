@@ -1,9 +1,22 @@
+"""Game where player fires at incoming enemies.
+Alien Invasion
+Julian Perez
+11/14/2025
+"""
+
 import sys
 import pygame
 from settings import Settings
 from ship import Ship
 from arsenal import Arsenal
 
+'''Lab 12, Option 2: Custom Assets.
+I drew original pixel art for a new player sprite, a unique attack, and a new background.
+To completely change the aesthetic of the game, the player is now a mage that fires fireballs.
+The background is the entrance to a crypt.
+The new firing sound effect is "Fireball Whoosh 2" by floraphonic from pixabay.com,
+which provides a free library of sound effects with no license or credit requirements.
+'''
 
 class AlienInvasion:
     def __init__(self) -> None:
@@ -34,11 +47,13 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _update_screen(self) -> None:
+        # Draws background and updates frames of game
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         pygame.display.flip()
 
     def _check_events(self) -> None:
+        # Checks events for pressing/releasing keys or quitting
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
@@ -49,13 +64,15 @@ class AlienInvasion:
                 elif event.type == pygame.KEYUP:
                     self._check_keyup_events(event)
 
+    # keyup events stop the ship from moving if direction keys no longer pressed
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
-
+    # keydown events move the ship with direction keys and fire with space bar, playing a sound effect whenever firing is successful.
+    # q to quit
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
