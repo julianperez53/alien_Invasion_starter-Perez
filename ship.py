@@ -19,7 +19,7 @@ class Ship:
         self.boundaries = self.screen.get_rect()
 
         self.image = pygame.image.load(self.settings.ship_file)
-        self.image1 = self.load(self.light_mage1)
+        self.image1 = self.settings.light_mage
         self.image = pygame.transform.scale(self.image, (self.settings.ship_w, self.settings.ship_h))
 
         self.rect = self.image.get_rect()
@@ -47,12 +47,7 @@ class Ship:
     def draw(self) -> None:
         # draws player sprite visually on screen
         self.arsenal.draw()
-        iterate = 0
-        animate = True
-        while animate:
-            if iterate >= len(self.light_mage):
-                iterate = 0
-            self.screem.blit(self.image1[iterate], self.rect)
+        self.screen.blit(self.image, self.rect)
 
     def fire(self) -> bool:
         # returns bool based on if player is able to fire a bullet

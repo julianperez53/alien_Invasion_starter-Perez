@@ -13,14 +13,6 @@ class Settings:
         self.FPS = 60
         # Changed bg_file to new cryptBG art
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'cryptBG.png'
-
-        self.light_mage = []
-        self.light_mage1 = Path.cwd() / 'Assets' / 'images' / 'Light Mage' / 'lightMageF1'
-
-        value = 1
-        while value < 9:
-            self.light_mage.append(Path.cwd() / 'Assets' / 'images' / 'Light Mage' / ('lightMageF' + str(value)))
-            value += 1
         
         # Changed ship_file to new lightMage art
         self.ship_file = Path.cwd() / 'Assets' / 'images' / 'lightMage.png'
