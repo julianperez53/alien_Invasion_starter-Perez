@@ -19,6 +19,7 @@ which provides a free library of sound effects with no license or credit require
 '''
 
 class AlienInvasion:
+    """Initialize and run game, check key presses"""
     def __init__(self) -> None:
         pygame.init()
         self.settings = Settings()
@@ -39,7 +40,7 @@ class AlienInvasion:
         self.ship = Ship(self, Arsenal(self))
 
     def run_game(self) -> None:
-        # Game loop
+        """Game loop"""
         while self.running:
             self._check_events()
             self.ship.update()
@@ -47,13 +48,13 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _update_screen(self) -> None:
-        # Draws background and updates frames of game
+        """Draws background and updates frames of game"""
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         pygame.display.flip()
 
     def _check_events(self) -> None:
-        # Checks events for pressing/releasing keys or quitting
+        """Checks events for pressing/releasing keys or quitting"""
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
