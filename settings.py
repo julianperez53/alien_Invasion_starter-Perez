@@ -20,7 +20,6 @@ class Settings:
         self.ship_h = 60
         self.ship_speed = 5
 
-
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'pixelFireball.png'
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'fireballSound.mp3'
         self.bullet_speed = 7
