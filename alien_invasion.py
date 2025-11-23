@@ -9,7 +9,6 @@ import pygame
 from settings import Settings
 from ship import Ship
 from arsenal import Arsenal
-# from alien import Alien
 from alien_fleet import AlienFleet
 
 '''Lab 12, Option 2: Custom Assets.
@@ -48,7 +47,7 @@ class AlienInvasion:
         while self.running:
             self._check_events()
             self.ship.update()
-            # self.alien.update()
+            self.alien_fleet.update_fleet()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
 

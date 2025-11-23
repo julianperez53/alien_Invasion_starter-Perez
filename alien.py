@@ -9,10 +9,11 @@ if TYPE_CHECKING:
     from alien_fleet import AlienFleet
 
 class Alien(Sprite):
-    def __init__(self, fleet: 'AlienFleet', x: float, y: float):
+    def __init__(self, fleet: 'AlienFleet', x: float, y: float) -> None:
         """initialize alien settings and loads sprite"""
         super().__init__()
 
+        self.fleet = fleet
         self.screen = fleet.game.screen
         self.boundaries = fleet.game.screen.get_rect()
         self.settings = fleet.game.settings
@@ -27,16 +28,12 @@ class Alien(Sprite):
         self.rect.y = y
 
         self.y = float(self.rect.y)
-        self.x = float(self.rect.y)
+        self.x = float(self.rect.x)
 
-    def update(self):
+    def update(self) -> None:
         temp_speed = self.settings.fleet_speed
 
-        if self.check_edges():
-            self.settings.fleet_direction *= -1
-            self.y += self.settings.fleet_drop_speed
-
-        self.x += temp_speed * self.settings.fleet_direction
+        self.x += temp_speed * self.fleet.fleet_direction
         self.rect.x = self.x
         self.rect.y = self.y
 
