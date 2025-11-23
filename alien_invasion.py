@@ -13,12 +13,14 @@ from arsenal import Arsenal
 from alien_fleet import AlienFleet
 from time import sleep
 
-'''Lab 12, Option 2: Custom Assets.
-I drew original pixel art for a new player sprite, a unique attack, and a new background.
-To completely change the aesthetic of the game, the player is now a mage that fires fireballs.
-The background is the entrance to a crypt.
-The new firing sound effect is "Fireball Whoosh 2" by floraphonic from pixabay.com,
+'''Lab 13, Custom Assets.
+I utilized the Geeks for Geeks website for ideas on different fleet shapes, and found the half-pyramid to be
+unique and interesting gameplay-wise. To increase the difficulty of the smaller amount of aliens, I increased
+the fleet's speed.
+I created new original pixel art for the alien enemy, which has been changed to a flying skeleton head.
+The new fire impact sound effect is "Fire Spell Impact" by DRAGON-STUDIO from pixabay.com,
 which provides a free library of sound effects with no license or credit requirements.
+I slightly adjusted the impact sound volume and fadeout time.
 '''
 
 class AlienInvasion:
@@ -42,7 +44,7 @@ class AlienInvasion:
         self.laser_sound.set_volume(0.7)
 
         self.impact_sound = pygame.mixer.Sound(self.settings.impact_sound)
-        self.impact_sound.set_volume(0.7)
+        self.impact_sound.set_volume(0.5)
 
         self.ship = Ship(self, Arsenal(self))
         self.alien_fleet = AlienFleet(self)
@@ -62,6 +64,7 @@ class AlienInvasion:
 
 
     def _check_collisions(self):
+        """check collisions for ship with aliens and aliens with projectiles and bottom of screen"""
         # check collisions for ship
         if self.ship.check_collisions(self.alien_fleet.fleet):
             self._check_game_status()
@@ -76,12 +79,13 @@ class AlienInvasion:
         collisions = self.alien_fleet.check_collisions(self.ship.arsenal.arsenal)
         if collisions:
             self.impact_sound.play()
-            self.impact_sound.fadeout(500)
+            self.impact_sound.fadeout(300)
 
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
 
     def _check_game_status(self):
+        """check lives left and reset level if none left"""
         if self.game_stats.ships_left > 0:
             self.game_stats.ships_left -= 1
             self._reset_level()
@@ -90,6 +94,7 @@ class AlienInvasion:
             self.game_active = False
 
     def _reset_level(self):
+        """ship recenters and recreates alien fleet at top screen"""
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()
