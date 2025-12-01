@@ -19,13 +19,16 @@ class Button:
         self._prep_msg(msg)
 
     def _prep_msg(self, msg):
+        '''checks font, text color, antialiasing to write inside button'''
         self.msg_image = self.font.render(msg, True, self.settings.text_color, None)
         self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center
 
     def draw(self):
+        '''draws button to screen, fills background behind text with color from settings'''
         self.screen.fill(self.settings.button_color, self.rect)
         self.screen.blit(self.msg_image, self.msg_image_rect)
 
     def check_clicked(self, mouse_pos):
+        '''bool if button is clicked with mouse'''
         return self.rect.collidepoint(mouse_pos)
